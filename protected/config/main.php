@@ -44,7 +44,7 @@ return array(
                             'bootstrap.gii',
                         ),
 		),
-
+                'page',
 	),
 
 	// application components
@@ -60,10 +60,15 @@ return array(
                 'showScriptName'=>false,
 			'rules'=>array(
                 '/<action:\w+>'=>'site/<action>',
-				'<controller:\w+>/<id:\d+>'=>'<controller>/view',
-				'<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
-				'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
-                                'page/index/<slug>'=>'page/index',
+                                'page/<slug>'                                   =>  'page/page/index',
+                                //'backend/<module>/<controller>/<action>'        =>  '<module>/<controller>backend/<action>',
+                                'backend/pages'                                 =>  'page/pagebackend/index',
+                                'backend/pages/<action>'                        =>  'page/pagebackend/<action>',
+				
+                                //general
+                                '<controller:\w+>/<id:\d+>'                     =>  '<controller>/view',
+				'<controller:\w+>/<action:\w+>/<id:\d+>'        =>  '<controller>/<action>',
+				'<controller:\w+>/<action:\w+>'                 =>  '<controller>/<action>',
 			),
 		),
                 
