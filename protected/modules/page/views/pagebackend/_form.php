@@ -4,7 +4,7 @@
 /* @var $form CActiveForm */
 
 Yii::app()->clientScript->registerScriptFile('/public/js/synctranslit/js/jquery.synctranslit.min.js');
-Yii::import('ext.imperavi-redactor-widget.ImperaviRedactorWidget');
+Yii::import('ext.editor.imperavi-redactor-widget.ImperaviRedactorWidget');
 ?>
 
 <div class="form">

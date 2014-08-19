@@ -12,7 +12,7 @@
 return array(
     // path aliases   
     'aliases' => array(
-        'bootstrap' => realpath(__DIR__ . '/../extensions/yiistrap'), // change this if necessary
+        'bootstrap' => realpath(__DIR__ . '/../extensions/style/yiistrap'), // change this if necessary
     ),
        // 'theme'=>'bootstrap', // requires you to copy the theme under your themes directory
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',

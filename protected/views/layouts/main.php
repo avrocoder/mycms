@@ -44,7 +44,7 @@
 		)); */?>
         <!--</div> --> <!-- mainmenu -->
             <?php
-            $this->widget('application.extensions.eflatmenu.EFlatMenu', array(
+            $this->widget('application.extensions.menu.eflatmenu.EFlatMenu', array(
                 'items' => array(
                     array('label' => 'Home', 'url' => array('/site/index'), /*'active' => true,*/ 'icon-class'=>'fa-home'),
                     array('label' => 'About', 'url' => array('/site/page', 'view' => 'about')),

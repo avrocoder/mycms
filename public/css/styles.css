@@ -15,10 +15,15 @@ h1
 /*overrade screen.css .span-19*/
 .span-19 
 {
-    width:700px;
+    width:900px;
 }
 
 .page_header
 {
     text-align: center;
+}
+
+ .grid-view .table .button-column 
+{
+    min-width: 70px !important;
 }

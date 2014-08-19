@@ -15,7 +15,7 @@ class EFlatMenu extends CWidget {
         parent::init();
  
         $cs=Yii::app()->getClientScript();
-        $scriptUrl = Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('application.extensions.eflatmenu.resources'));
+        $scriptUrl = Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('application.extensions.menu.eflatmenu.resources'));
  
         $cs->registerCssFile($scriptUrl . '/eflatmenu.css');
         $cs->registerCssFile($scriptUrl . '/font-awesome/css/font-awesome.css');
