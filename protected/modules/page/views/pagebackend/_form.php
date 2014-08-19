@@ -92,7 +92,7 @@ $this->widget('ImperaviRedactorWidget', array(
         'lang' => 'ru',
         'toolbar' => true,
         'iframe' => true,
-        'imageUpload' =>  $this->createUrl('page/upload'),
+        'imageUpload' =>  $this->createUrl('pagebackend/upload'),
         'imageUploadErrorCallback'=>'js:function(obj, json){ alert(json.error); }', // function to show upload error to user
        
         
