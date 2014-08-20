@@ -7,7 +7,7 @@ class PageController extends BaseFrontendController
         $page = new Page;
         $data = $page::model()->find('slug=:slug',array(':slug'=>$slug));
         if ($data == null)
-            throw new CHttpException(404, 'Страницы "'. $this->createAbsoluteUrl('page/index/' . $slug) . '" не существует');
+            throw new CHttpException(404);
 
         $this->render('index',array('data'=>$data)); 
         

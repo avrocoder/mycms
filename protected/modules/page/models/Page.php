@@ -42,6 +42,7 @@ class Page extends CActiveRecord
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, title, slug, content, keywords, description, user', 'safe', 'on'=>'search'),
+                        array('slug', 'unique'),
 		);
 	}
 

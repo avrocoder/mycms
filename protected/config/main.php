@@ -56,10 +56,10 @@ return array(
 		// uncomment the following to enable URLs in path-format
 
 		'urlManager'=>array(
-			'urlFormat'=>'path',
+			'urlFormat'=>'path',                    
                 'showScriptName'=>false,
 			'rules'=>array(
-                '/<action:\w+>'=>'site/<action>',
+                                
                                 'page/<slug>'                                   =>  'page/page/index',
                                 //'backend/<module>/<controller>/<action>'        =>  '<module>/<controller>backend/<action>',
                                 'backend/pages'                                 =>  'page/pagebackend/index',
@@ -69,6 +69,7 @@ return array(
                                 '<controller:\w+>/<id:\d+>'                     =>  '<controller>/view',
 				'<controller:\w+>/<action:\w+>/<id:\d+>'        =>  '<controller>/<action>',
 				'<controller:\w+>/<action:\w+>'                 =>  '<controller>/<action>',
+                                //'/<action:\w+>'=>'site/<action>',
 			),
 		),
                 
@@ -109,12 +110,13 @@ return array(
 				*/
 			),
 		),
-                /*'bootstrap'=>array(
-                    'class'=>'bootstrap.components.Bootstrap',
-                ),*/
-            
-                'bootstrap' => array(
-                    'class' => 'bootstrap.components.TbApi',   
+                            
+                'bootstrap'=>array(
+                    'class'=>'bootstrap.components.TbApi',   
+                ),
+                
+                'cache'=>array(
+                    'class'=>'system.caching.CFileCache',
                 ),
 	),
 
