@@ -1,45 +1,21 @@
-    <?php
-/* @var $this PageController */
-/* @var $model Page */
-
+<?php
 $this->breadcrumbs=array(
 	'Pages'=>array('index'),
-	$model->title,
+	$data->title,
 );
 
 $this->menu=array(
 	array('label'=>'List Page', 'url'=>array('index')),
 	array('label'=>'Create Page', 'url'=>array('create')),
-	array('label'=>'Update Page', 'url'=>array('update', 'id'=>$model->id)),
-	array('label'=>'Delete Page', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
+	array('label'=>'Update Page', 'url'=>array('update', 'id'=>$data->id)),
+	array('label'=>'Delete Page', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$data->id),'confirm'=>'Are you sure you want to delete this item?')),
 	array('label'=>'Manage Page', 'url'=>array('admin')),
 );
+
+        $this->pageTitle=Yii::app()->name . " - {$data->title}";
+        $this->pageKeywords = $data->keywords;
+        $this->pageDescription = $data->description;
+
+        echo '<h2 class="page_header">' . $data->title . '</h2>';
+        echo $data->content;
 ?>
-
-<h1>View Page #<?php echo $model->id; ?></h1>
-
-<?php $this->widget('zii.widgets.CDetailView', array(
-	'data'=>$model,
-	'attributes'=>array(
-		'id',
-		'title',
-		//'content:html',
-		'keywords',
-		'description',
-		'user'=>array(
-                 'name' => 'user',
-                 'value' => $model->user->username,
-                    
-                ),
-		array(
-                 'name' => 'created_at',
-                 'value' => Date('d.m.Y H:i:s',$model->created_at),
-                    
-                ),
-		array(
-                 'name' => 'updated_at',
-                 'value' => Date('d.m.Y H:i:s',$model->updated_at),
-                    
-                ),
-	),
-)); ?>

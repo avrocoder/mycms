@@ -51,9 +51,16 @@ class PagebackendController extends BaseBackendController
 	 */
 	public function actionView($id)
 	{
-		$this->render('view',array(
-			'model'=>$this->loadModel($id),
-		));
+//		$this->render('view',array(
+//			'model'=>$this->loadModel($id),
+//		));
+                $page = new Page;
+//                $data = $page::model()->find('slug=:slug',array(':slug'=>$slug));
+                $data = $page::model()->findByPk($id);
+                if ($data == null)
+                    throw new CHttpException(404, 'Страницы "'. $this->createAbsoluteUrl('backend/page/view/' . $id) . '" не существует');
+                
+                $this->render('view',array('data'=>$data)); 
 	}
 
 	/**
