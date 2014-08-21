@@ -12,13 +12,14 @@
 return array(
     // path aliases   
     'aliases' => array(
+        'core' => realpath(__DIR__ . '/../modules/core'), // change this if necessary
         'bootstrap' => realpath(__DIR__ . '/../extensions/style/yiistrap'), // change this if necessary
     ),
        // 'theme'=>'bootstrap', // requires you to copy the theme under your themes directory
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 	'name'=>'My CMS',
         'language'          => 'ru',               // язык по умолчанию
-        'sourceLanguage'    => 'en',
+        'sourceLanguage'    => 'ru',
 
 	// preloading 'log' component
 	'preload'=>array('log'),
@@ -45,6 +46,9 @@ return array(
                         ),
 		),
                 'page',
+                'core'=>array(
+                    'cache_duration' => 25,
+                ),
 	),
 
 	// application components
@@ -89,6 +93,7 @@ return array(
 			'password' => '12345678',
 			'charset' => 'utf8',
                         'tablePrefix' => 'tbl_',
+                        'enableProfiling' => true,  //report in the bottom of page
 		),
 		
 		'errorHandler'=>array(
@@ -99,15 +104,17 @@ return array(
 			'class'=>'CLogRouter',
 			'routes'=>array(
 				array(
-					'class'=>'CFileLogRoute',
-					'levels'=>'error, warning',
+//                                      'class'=>'CFileLogRoute',       //default
+//					'levels'=>'error, warning',     //default
+					'class'=>'CProfileLogRoute',    //report in the bottom of page
+					'report'=>'summary',            //report in the bottom of page
 				),
 				// uncomment the following to show log messages on web pages
-				/*
+				
 				array(
 					'class'=>'CWebLogRoute',
 				),
-				*/
+				
 			),
 		),
                             
@@ -117,7 +124,7 @@ return array(
                 
                 'cache'=>array(
                     'class'=>'system.caching.CFileCache',
-                ),
+              ),
 	),
 
 	// application-level parameters that can be accessed

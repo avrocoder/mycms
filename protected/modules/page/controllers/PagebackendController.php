@@ -51,12 +51,10 @@ class PagebackendController extends BaseBackendController
 	 */
 	public function actionView($id)
 	{
-//		$this->render('view',array(
-//			'model'=>$this->loadModel($id),
-//		));
                 $page = new Page;
-//                $data = $page::model()->find('slug=:slug',array(':slug'=>$slug));
-                $data = $page::model()->findByPk($id);
+                $dependency = new CDbCacheDependency("SELECT `updated_at` FROM `tbl_page` WHERE `id`={$id}");
+                $data = $page::model()->cache(Yii::app()->getModule('core')->cache_duration, $dependency)->findByPk($id);
+
                 if ($data == null)
                     throw new CHttpException(404, 'Страницы "'. $this->createAbsoluteUrl('backend/page/view/' . $id) . '" не существует');
                 
