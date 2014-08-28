@@ -39,7 +39,7 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 	'model'=>$model,
 )); ?>
 </div><!-- search-form -->
-
+<?php Yii::import('bootstrap.widgets.*')?>
 <?php $this->widget('bootstrap.widgets.TbGridView', array(
 	'id'=>'page-grid',
 	'dataProvider'=>$model->search(),
@@ -49,11 +49,18 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 		'title',
                 'slug',
 		//'content',
-		'keywords',
-		'description',
+		//'keywords',
+		//'description',
+                'status',
 		array(
                  'name' => 'user',
                  'value' => '$data->user->username',
+                    
+                ),
+		array(
+                 'header' => 'Url',
+                 'type' => 'raw',
+                 'value' => 'CHtml::link($data->getUrl(), array("/page/$data->slug"))',
                     
                 ),
 		/*

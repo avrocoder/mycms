@@ -10,6 +10,7 @@
  * @property string $content
  * @property string $keywords
  * @property string $description
+ * @property integer $status
  * @property integer $user_id
  * @property integer $created_at
  * @property integer $updated_at
@@ -19,7 +20,10 @@
  */
 class Page extends CActiveRecord
 {
-	/**
+    const PUBLISHED = 2;
+    const DRAFT = 1;
+
+    /**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
@@ -36,8 +40,8 @@ class Page extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			// array('title, content, keywords, description, user_id, created_at, updated_at', 'required'),
-			array('title, slug, content, keywords, description', 'required'),
-			//array('user_id, created_at, updated_at', 'numerical', 'integerOnly'=>true),
+			array('title, slug, content, keywords, description, status', 'required'),
+			array('status', 'numerical', 'integerOnly'=>true),
 			array('title, slug', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
@@ -70,6 +74,7 @@ class Page extends CActiveRecord
 			'content' => 'Content',
 			'keywords' => 'Keywords',
 			'description' => 'Description',
+			'status' => 'Status',
 			'user' => 'User',
 		);
 	}
@@ -100,6 +105,7 @@ class Page extends CActiveRecord
 		//$criteria->compare('content',$this->content,true);
 		$criteria->compare('keywords',$this->keywords,true);
 		$criteria->compare('description',$this->description,true);
+                $criteria->compare('status',$this->status,true);
 		$criteria->compare('username',$this->user,true);
                 
                 $sort = new CSort();
@@ -144,5 +150,29 @@ class Page extends CActiveRecord
             }
             
             return parent::beforeValidate();
+        }
+        
+        public function scopes() {
+            return array(
+                'published'=>array(
+                    'condition'=>'status='.self::PUBLISHED,
+                ),
+                'draft'=>array(
+                    'condition'=>'status='.self::DRAFT,
+                ),
+            );
+        }
+        
+        public function getUrl()
+        {
+            return Yii::app()->createAbsoluteUrl('page', array('slug' => $this->slug));
+        }
+        
+        public function getStatusList()
+        {
+            return array(
+                '1'=>'draft',
+                '2'=>'published',
+            );
         }
 }

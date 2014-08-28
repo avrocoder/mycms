@@ -49,6 +49,9 @@
                     array('label' => 'Home', 'url' => array('/site/index'), /*'active' => true,*/ 'icon-class'=>'fa-home'),
                     array('label' => 'About', 'url' => array('/site/page', 'view' => 'about')),
                     array('label' => 'Contact', 'url' => array('/site/contact')),
+                    array('label' => 'Modules', 'url' => '#','items' => array(
+                         array('label' => 'Page', 'url' => 'backend/pages'),
+                    )),
                     array('label'=>'Level 2 Menu', 'url'=>'#', 'items' => array(
                         array('label' => 'Sub-Menu 1', 'url' => '#'),
                         array('label' => 'Level 3 Menu', 'url' => '#', 'items' => array(

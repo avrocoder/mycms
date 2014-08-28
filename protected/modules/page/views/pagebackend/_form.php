@@ -40,6 +40,15 @@ Yii::import('ext.editor.imperavi-redactor-widget.ImperaviRedactorWidget');
 		<?php echo $form->error($model,'content'); ?>
 	</div>
 
+        <div class="row">
+                <?php echo $form->labelEx($model,'status'); ?>
+                <?php echo $form->dropDownList($model,'status',$model->getStatusList(),
+                        array('empty' => 'Type...', 'data-toggle'=>"tooltip", 
+                              'title'=>"Page status", 'data-placement'=>"right", 
+                              'options' => array(2 => array('selected' => 'selected')))); ?>
+                <?php echo $form->error($model,'status'); ?>
+        </div>
+
         <?php echo CHtml::link('Meta data','javascript:void(0)', array('class'=>'show-metadata', 'data-toggle'=>"tooltip", 'title'=>"Tooltip on right", 'data-placement'=>"right"))?>
 
         <div class='hidden_block'>

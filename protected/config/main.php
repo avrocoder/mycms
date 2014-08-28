@@ -28,9 +28,11 @@ return array(
 	'import'=>array(
 		'application.models.*',
 		'application.components.*',
-                'bootstrap.helpers.*',
-                'bootstrap.behaviors.*',
-                'bootstrap.widgets.*',
+                'core.components.*',
+                'bootstrap.helpers.TbArray',
+                'bootstrap.behaviors.TbWidget',
+                'bootstrap.widgets.*'
+
 	),
 
 	'modules'=>array(
@@ -47,7 +49,7 @@ return array(
 		),
                 'page',
                 'core'=>array(
-                    'cache_duration' => 25,
+                    'cache_duration' => 20,
                 ),
 	),
 
@@ -63,7 +65,7 @@ return array(
 			'urlFormat'=>'path',                    
                 'showScriptName'=>false,
 			'rules'=>array(
-                                
+                                'site/<action>'                                 => 'site/<action>',
                                 'page/<slug>'                                   =>  'page/page/index',
                                 //'backend/<module>/<controller>/<action>'        =>  '<module>/<controller>backend/<action>',
                                 'backend/pages'                                 =>  'page/pagebackend/index',
