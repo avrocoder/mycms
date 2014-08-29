@@ -20,8 +20,8 @@
  */
 class Page extends CActiveRecord
 {
-    const PUBLISHED = 2;
-    const DRAFT = 1;
+    const PUBLISHED = 1;
+    const DRAFT = 0;
 
     /**
 	 * @return string the associated database table name
@@ -171,8 +171,8 @@ class Page extends CActiveRecord
         public function getStatusList()
         {
             return array(
-                '1'=>'draft',
-                '2'=>'published',
+                '0'=>'draft',
+                '1'=>'published',
             );
         }
 }
