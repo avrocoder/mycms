@@ -41,7 +41,7 @@ class Page extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			// array('title, content, keywords, description, user_id, created_at, updated_at', 'required'),
-			array('category_id, title, slug, content, keywords, description, status', 'required'),
+			array('category_id, title, slug, content, status', 'required'),
 			array('category_id, status', 'numerical', 'integerOnly'=>true),
 			array('title, slug', 'length', 'max'=>255),
 			// The following rule is used by search().
