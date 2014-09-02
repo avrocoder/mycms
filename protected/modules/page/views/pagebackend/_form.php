@@ -52,7 +52,7 @@ Yii::import('ext.editor.imperavi-redactor-widget.ImperaviRedactorWidget');
                 <?php echo $form->dropDownList($model,'status',$model->getStatusList(),
                         array('empty' => 'Type...', 'data-toggle'=>"tooltip", 
                               'title'=>"Page status", 'data-placement'=>"right", 
-                              'options' => array(2 => array('selected' => 'selected')))); ?>
+                              'options' => array(1 => array('selected' => 'selected')))); ?>
                 <?php echo $form->error($model,'status'); ?>
         </div>
 

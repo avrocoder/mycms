@@ -29,6 +29,7 @@ return array(
 		'application.models.*',
 		'application.components.*',
                 'core.components.*',
+                'core.models.*',
                 'bootstrap.helpers.TbArray',
                 'bootstrap.behaviors.TbWidget',
                 'bootstrap.widgets.*'

@@ -19,15 +19,9 @@
  * The followings are the available model relations:
  * @property User $user
  */
-class Page extends CActiveRecord
+class Page extends BaseBackendModel
 {
-    const PUBLISHED = 1;
-    const DRAFT = 0;
     
-    public $statusList = array(
-                '0'=>'draft',
-                '1'=>'published',
-           );
     /**
 	 * @return string the associated database table name
 	 */
@@ -164,29 +158,10 @@ class Page extends CActiveRecord
             return parent::beforeValidate();
         }
         
-        public function scopes() {
-            return array(
-                'published'=>array(
-                    'condition'=>'status='.self::PUBLISHED,
-                ),
-                'draft'=>array(
-                    'condition'=>'status='.self::DRAFT,
-                ),
-            );
-        }
         
         public function getUrl()
         {
             return Yii::app()->createAbsoluteUrl('page', array('slug' => $this->slug));
         }
         
-        public function getStatusList()
-        {
-            return $this->statusList;
-        }
-        
-        public function getStatusName($number)
-        {
-            return $this->statusList[$number];
-        }
 }

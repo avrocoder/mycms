@@ -14,7 +14,7 @@
  * The followings are the available model relations:
  * @property Page[] $pages
  */
-class Category extends CActiveRecord
+class Category extends BaseBackendModel
 {
 	/**
 	 * @return string the associated database table name
