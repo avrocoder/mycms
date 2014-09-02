@@ -5,6 +5,7 @@
  *
  * The followings are the available columns in table 'tbl_page':
  * @property integer $id
+ * @property string $category_id
  * @property string $title
  * @property string $slug
  * @property string $content
@@ -40,12 +41,12 @@ class Page extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			// array('title, content, keywords, description, user_id, created_at, updated_at', 'required'),
-			array('title, slug, content, keywords, description, status', 'required'),
-			array('status', 'numerical', 'integerOnly'=>true),
+			array('category_id, title, slug, content, keywords, description, status', 'required'),
+			array('category_id, status', 'numerical', 'integerOnly'=>true),
 			array('title, slug', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, title, slug, content, keywords, description, user', 'safe', 'on'=>'search'),
+			array('id, category, title, slug, content, keywords, description, user', 'safe', 'on'=>'search'),
                         array('slug', 'unique'),
 		);
 	}
@@ -59,6 +60,7 @@ class Page extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'user' => array(self::BELONGS_TO, 'User', 'user_id'),
+			'category' => array(self::BELONGS_TO, 'Category', 'category_id'),
 		);
 	}
 
@@ -69,6 +71,7 @@ class Page extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
+                        'category' => 'Category',
 			'title' => 'Title',
 			'slug' => 'Slug',
 			'content' => 'Content',
@@ -97,9 +100,10 @@ class Page extends CActiveRecord
 
 		$criteria=new CDbCriteria;
                 
-                $criteria->with = array('user');
+                $criteria->with = array('user','category');
 
 		$criteria->compare('id',$this->id);
+		$criteria->compare('name',$this->category,true);
 		$criteria->compare('title',$this->title,true);
 		$criteria->compare('slug',$this->slug,true);
 		//$criteria->compare('content',$this->content,true);
@@ -113,6 +117,10 @@ class Page extends CActiveRecord
                     'user'=>array(
                         'asc'=>'username',
                         'desc'=>'username DESC',
+                    ),
+                    'categories'=>array(
+                        'asc'=>'name',
+                        'desc'=>'name DESC',
                     ),
                     '*',
                 );

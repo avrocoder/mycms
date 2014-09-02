@@ -29,6 +29,13 @@ Yii::import('ext.editor.imperavi-redactor-widget.ImperaviRedactorWidget');
 	</div>
 
         <div class="row">
+                <?php echo $form->labelEx($model,'category'); ?>
+                <?php echo $form->dropDownList($model,'category_id',CHtml::listData(Category::model()->findAll(), 'id', 'name'),array('empty'=>'Category...')); ?>
+		<?php echo $form->error($model,'category'); ?>
+
+	</div>
+
+        <div class="row">
 		<?php echo $form->labelEx($model,'slug'); ?>
 		<?php echo $form->textField($model,'slug',array('size'=>60,'maxlength'=>255, 'data-toggle'=>"tooltip", 'title'=>"It uses in the url to this page.", 'data-placement'=>"right")); ?>
 		<?php echo $form->error($model,'slug'); ?>
