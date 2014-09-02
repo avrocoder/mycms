@@ -30,7 +30,7 @@ Yii::import('ext.editor.imperavi-redactor-widget.ImperaviRedactorWidget');
 
         <div class="row">
                 <?php echo $form->labelEx($model,'category'); ?>
-                <?php echo $form->dropDownList($model,'category_id',CHtml::listData(Category::model()->findAll(), 'id', 'name'),array('empty'=>'Category...')); ?>
+                <?php echo $form->dropDownList($model,'category',CHtml::listData(Category::model()->findAll(), 'id', 'name'),array('empty'=>'Category...')); ?>
 		<?php echo $form->error($model,'category'); ?>
 
 	</div>

@@ -46,7 +46,7 @@ class Page extends CActiveRecord
 			array('title, slug', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, category, title, slug, content, keywords, description, user', 'safe', 'on'=>'search'),
+			array('id, category_id, title, slug, content, keywords, description, user', 'safe', 'on'=>'search'),
                         array('slug', 'unique'),
 		);
 	}
@@ -71,7 +71,7 @@ class Page extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-                        'category' => 'Category',
+                        'category_id' => 'Category',
 			'title' => 'Title',
 			'slug' => 'Slug',
 			'content' => 'Content',
@@ -103,7 +103,7 @@ class Page extends CActiveRecord
                 $criteria->with = array('user','category');
 
 		$criteria->compare('id',$this->id);
-		$criteria->compare('name',$this->category,true);
+		$criteria->compare('category_id',$this->category_id,true);
 		$criteria->compare('title',$this->title,true);
 		$criteria->compare('slug',$this->slug,true);
 		//$criteria->compare('content',$this->content,true);
@@ -118,7 +118,7 @@ class Page extends CActiveRecord
                         'asc'=>'username',
                         'desc'=>'username DESC',
                     ),
-                    'categories'=>array(
+                    'category_id'=>array(
                         'asc'=>'name',
                         'desc'=>'name DESC',
                     ),

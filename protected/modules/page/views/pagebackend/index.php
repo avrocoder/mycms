@@ -50,6 +50,7 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
                 array(
                      'name' => 'category',
                      'value' => '$data->category->name',
+                     'filter' => CHtml::activeDropDownList($model, 'category_id', CHtml::listData(Category::model()->findAll(), 'id', 'name'), array('encode' => false, 'empty' => ''))
                 ),
                 'slug',
 		//'content',
