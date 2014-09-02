@@ -23,7 +23,11 @@ class Page extends CActiveRecord
 {
     const PUBLISHED = 1;
     const DRAFT = 0;
-
+    
+    public $statusList = array(
+                '0'=>'draft',
+                '1'=>'published',
+           );
     /**
 	 * @return string the associated database table name
 	 */
@@ -102,14 +106,14 @@ class Page extends CActiveRecord
                 
                 $criteria->with = array('user','category');
 
-		$criteria->compare('id',$this->id);
+		$criteria->compare('t.id',$this->id);
 		$criteria->compare('category_id',$this->category_id,true);
 		$criteria->compare('title',$this->title,true);
 		$criteria->compare('slug',$this->slug,true);
 		//$criteria->compare('content',$this->content,true);
 		$criteria->compare('keywords',$this->keywords,true);
 		$criteria->compare('description',$this->description,true);
-                $criteria->compare('status',$this->status,true);
+                $criteria->compare('t.status',$this->status,true);
 		$criteria->compare('username',$this->user,true);
                 
                 $sort = new CSort();
@@ -178,9 +182,11 @@ class Page extends CActiveRecord
         
         public function getStatusList()
         {
-            return array(
-                '0'=>'draft',
-                '1'=>'published',
-            );
+            return $this->statusList;
+        }
+        
+        public function getStatusName($number)
+        {
+            return $this->statusList[$number];
         }
 }

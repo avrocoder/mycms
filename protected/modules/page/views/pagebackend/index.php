@@ -50,13 +50,15 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
                 array(
                      'name' => 'category',
                      'value' => '$data->category->name',
-                     'filter' => CHtml::activeDropDownList($model, 'category_id', CHtml::listData(Category::model()->findAll(), 'id', 'name'), array('encode' => false, 'empty' => ''))
+                     'filter' => CHtml::activeDropDownList($model, 'category_id', CHtml::listData(Category::model()->findAll(), 'id', 'name'), array('empty' => ''))
                 ),
                 'slug',
-		//'content',
-		//'keywords',
-		//'description',
-                'status',
+                array(
+                    'name' => 'status',
+                    'value' => '$data->getStatusName($data->status)',
+                    'filter' => CHtml::activeDropDownList($model, 'status', Page::model()->getStatusList(), array('empty' => ''))
+                ),
+                
 		array(
                  'name' => 'user',
                  'value' => '$data->user->username',
@@ -66,12 +68,7 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
                  'header' => 'Url',
                  'type' => 'raw',
                  'value' => 'CHtml::link($data->getUrl(), array("/page/$data->slug"))',
-                    
                 ),
-		/*
-		'created_at',
-		'updated_at',
-		*/
 		array(
 			'class'=>'CButtonColumn',
 		),
