@@ -9,7 +9,6 @@ $this->menu=array(
 	array('label'=>'Create Page', 'url'=>array('create')),
 	array('label'=>'Update Page', 'url'=>array('update', 'id'=>$data->id)),
 	array('label'=>'Delete Page', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$data->id),'confirm'=>'Are you sure you want to delete this item?')),
-	array('label'=>'Manage Page', 'url'=>array('admin')),
 );
 
         $this->pageTitle=Yii::app()->name . " - {$data->title}";

@@ -36,7 +36,7 @@ class PagebackendController extends BaseBackendController
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete'),
+				'actions'=>array('index','delete'),
 				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -128,23 +128,12 @@ class PagebackendController extends BaseBackendController
 	 */
 	public function actionIndex()
 	{
-                $dataProvider=new CActiveDataProvider('Page');
-		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
-		));
-	}
-
-	/**
-	 * Manages all models.
-	 */
-	public function actionAdmin()
-	{
-		$model=new Page('search');
+            $model=new Page('search');
 		$model->unsetAttributes();  // clear any default values
 		if(isset($_GET['Page']))
 			$model->attributes=$_GET['Page'];
 
-		$this->render('admin',array(
+		$this->render('index',array(
 			'model'=>$model,
 		));
 	}
