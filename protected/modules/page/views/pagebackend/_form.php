@@ -51,7 +51,7 @@ Yii::import('application.modules.category.models.*');
         <div class="row">
                 <?php echo $form->labelEx($model,'status'); ?>
                 <?php echo $form->dropDownList($model,'status',$model->getStatusList(),
-                        array('empty' => 'Type...', 'data-toggle'=>"tooltip", 
+                        array('data-toggle'=>"tooltip", 
                               'title'=>"Page status", 'data-placement'=>"right", 
                               'options' => array(1 => array('selected' => 'selected')))); ?>
                 <?php echo $form->error($model,'status'); ?>
