@@ -30,7 +30,7 @@ return array(
 		'application.components.*',
                 'core.components.*',
                 'core.models.*',
-                'bootstrap.helpers.TbArray',
+                'bootstrap.helpers.*',
                 'bootstrap.behaviors.TbWidget',
                 'bootstrap.widgets.*'
 
@@ -52,6 +52,7 @@ return array(
                 'core'=>array(
                     'cache_duration' => 20,
                 ),
+                'category',
 	),
 
 	// application components
@@ -71,6 +72,8 @@ return array(
                                 //'backend/<module>/<controller>/<action>'        =>  '<module>/<controller>backend/<action>',
                                 'backend/pages'                                 =>  'page/pagebackend/index',
                                 'backend/pages/<action>'                        =>  'page/pagebackend/<action>',
+                                'backend/categories'                            =>  'category/categorybackend/index',
+                                'backend/categories/<action>'                   =>  'category/categorybackend/<action>',
 				
                                 //general
                                 '<controller:\w+>/<id:\d+>'                     =>  '<controller>/view',

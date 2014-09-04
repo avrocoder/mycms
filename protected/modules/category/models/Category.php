@@ -41,7 +41,7 @@ class Category extends BaseBackendModel
 		);
 	}
 
-	/**
+        /**
 	 * @return array relational rules.
 	 */
 	public function relations()
@@ -49,6 +49,8 @@ class Category extends BaseBackendModel
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'parent' => array(self::BELONGS_TO, 'Category', 'parent_id'),
+			'categories' => array(self::HAS_MANY, 'Category', 'parent_id'),
 			'pages' => array(self::HAS_MANY, 'Page', 'category_id'),
 		);
 	}
@@ -87,13 +89,13 @@ class Category extends BaseBackendModel
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
-		$criteria->compare('parent_id',$this->parent_id);
+		$criteria->compare('parent_id',$this->parent_id,true);
 		$criteria->compare('name',$this->name,true);
 		$criteria->compare('description',$this->description,true);
 		$criteria->compare('slug',$this->slug,true);
 		$criteria->compare('status',$this->status);
-
-		return new CActiveDataProvider($this, array(
+                
+  		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
 	}
@@ -108,4 +110,9 @@ class Category extends BaseBackendModel
 	{
 		return parent::model($className);
 	}
+        
+        public function getParentName()
+        {
+            return ($this->parent_id !== null) ? $this->parent->name : '-';
+        }
 }
