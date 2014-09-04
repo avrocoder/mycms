@@ -50,6 +50,7 @@
                     array('label' => 'About', 'url' => array('/site/page', 'view' => 'about')),
                     array('label' => 'Contact', 'url' => array('/site/contact')),
                     array('label' => 'Modules', 'url' => '#','items' => array(
+                         array('label' => 'Categories', 'url' => '/backend/categories'),
                          array('label' => 'Page', 'url' => '/backend/pages'),
                     )),
                     array('label'=>'Level 2 Menu', 'url'=>'#', 'items' => array(

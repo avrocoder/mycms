@@ -5,6 +5,7 @@
 
 Yii::app()->clientScript->registerScriptFile('/public/js/synctranslit/js/jquery.synctranslit.min.js');
 Yii::import('ext.editor.imperavi-redactor-widget.ImperaviRedactorWidget');
+Yii::import('application.modules.category.models.*');
 ?>
 
 <div class="form">
@@ -80,7 +81,7 @@ Yii::import('ext.editor.imperavi-redactor-widget.ImperaviRedactorWidget');
 </div><!-- form -->
 <?php Yii::app()->clientScript->registerScriptFile('/public/bootstrap/js/bootstrap.min.js'); ?>
 
-<script>
+<script type="text/javascript">
  
 
 
@@ -110,8 +111,6 @@ $this->widget('ImperaviRedactorWidget', array(
         'iframe' => true,
         'imageUpload' =>  $this->createUrl('pagebackend/upload'),
         'imageUploadErrorCallback'=>'js:function(obj, json){ alert(json.error); }', // function to show upload error to user
-       
-        
     ),
 ));
 

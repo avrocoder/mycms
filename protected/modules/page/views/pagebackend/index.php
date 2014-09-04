@@ -39,7 +39,9 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 	'model'=>$model,
 )); ?>
 </div><!-- search-form -->
-<?php Yii::import('bootstrap.widgets.*')?>
+<?php 
+    Yii::import('application.modules.category.models.*');
+?>
 <?php $this->widget('bootstrap.widgets.TbGridView', array(
 	'id'=>'page-grid',
 	'dataProvider'=>$model->search(),
