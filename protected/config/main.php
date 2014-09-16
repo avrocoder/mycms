@@ -14,7 +14,10 @@ return array(
     'aliases' => array(
         'core' => realpath(__DIR__ . '/../modules/core'), // change this if necessary
         'bootstrap' => realpath(__DIR__ . '/../extensions/style/yiistrap'), // change this if necessary
+//        'booster' => realpath(__DIR__ . '/../extensions/style/yiibooster'), // change this if necessary
     ),
+    
+    
        // 'theme'=>'bootstrap', // requires you to copy the theme under your themes directory
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 	'name'=>'My CMS',
@@ -22,17 +25,17 @@ return array(
         'sourceLanguage'    => 'ru',
 
 	// preloading 'log' component
-	'preload'=>array('log'),
+	'preload'=>array('log'/*, 'booster'*/),
 
 	// autoloading model and component classes
 	'import'=>array(
 		'application.models.*',
 		'application.components.*',
-                'core.components.*',
+                'core.components.controllers.*',
                 'core.models.*',
                 'bootstrap.helpers.*',
                 'bootstrap.behaviors.TbWidget',
-                'bootstrap.widgets.*'
+                'bootstrap.widgets.*',
 
 	),
 
@@ -53,10 +56,16 @@ return array(
                     'cache_duration' => 20,
                 ),
                 'category',
+                'menu',
 	),
 
 	// application components
 	'components'=>array(
+                
+//                'booster' => array(
+//                    'class' => 'booster.components.Booster',
+//                ),
+            
 		'user'=>array(
 			// enable cookie-based authentication
 			'allowAutoLogin'=>true,
@@ -74,6 +83,10 @@ return array(
                                 'backend/pages/<action>'                        =>  'page/pagebackend/<action>',
                                 'backend/categories'                            =>  'category/categorybackend/index',
                                 'backend/categories/<action>'                   =>  'category/categorybackend/<action>',
+                                'backend/menu/items'                            =>  'menu/menuItembackend/index',
+                                'backend/menu/items/<action>'                   =>  'menu/menuItembackend/<action>',
+                                'backend/menu'                                  =>  'menu/menubackend/index',
+                                'backend/menu/<action>'                         =>  'menu/menubackend/<action>',
 				
                                 //general
                                 '<controller:\w+>/<id:\d+>'                     =>  '<controller>/view',

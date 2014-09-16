@@ -28,9 +28,6 @@
 
 <div class="container" id="page">
 
-	<div id="header">
-		<div id="logo"><?php echo CHtml::encode(Yii::app()->name); ?></div>
-	</div><!-- header -->
 
 	<!--<div id="mainmenu"> -->
 		<?php /*$this->widget('zii.widgets.CMenu',array(
@@ -44,25 +41,33 @@
 		)); */?>
         <!--</div> --> <!-- mainmenu -->
             <?php
-            $this->widget('application.extensions.menu.eflatmenu.EFlatMenu', array(
-                'items' => array(
-                    array('label' => 'Home', 'url' => array('/site/index'), /*'active' => true,*/ 'icon-class'=>'fa-home'),
-                    array('label' => 'About', 'url' => array('/site/page', 'view' => 'about')),
-                    array('label' => 'Contact', 'url' => array('/site/contact')),
-                    array('label' => 'Modules', 'url' => '#','items' => array(
-                         array('label' => 'Categories', 'url' => '/backend/categories'),
-                         array('label' => 'Page', 'url' => '/backend/pages'),
-                    )),
-                    array('label'=>'Level 2 Menu', 'url'=>'#', 'items' => array(
-                        array('label' => 'Sub-Menu 1', 'url' => '#'),
-                        array('label' => 'Level 3 Menu', 'url' => '#', 'items' => array(
-                            array('label' => 'Sub-Menu 1', 'url' => '#'),
-                             array('label' => 'Sub-Menu 2', 'url' => '#'),
-                        )),
-                    )),
-                    array('label' => 'Login', 'url' => array('site/login'), 'visible' => Yii::app()->user->isGuest),
-                    array('label' => 'Logout (' . Yii::app()->user->name . ')', 'url' => array('/site/logout'), 'visible' => !Yii::app()->user->isGuest)
-                )
+//            $this->widget('application.extensions.menu.eflatmenu.EFlatMenu', array(
+//                'items' => array(
+//                    array('label' => 'Home', 'url' => array('/site/index'), /*'active' => true,*/ 'icon-class'=>'fa-home'),
+//                    array('label' => 'About', 'url' => array('/site/page', 'view' => 'about')),
+//                    array('label' => 'Contact', 'url' => array('/site/contact')),
+//                    array('label' => 'Modules', 'url' => '#','items' => array(
+//                         array('label' => 'Categories', 'url' => '/backend/categories'),
+//                         array('label' => 'Menu', 'url' => '/backend/menu'),
+//                         array('label' => 'Page', 'url' => '/backend/pages'),
+//                    )),
+//                    array('label'=>'Level 2 Menu', 'url'=>'#', 'items' => array(
+//                        array('label' => 'Sub-Menu 1', 'url' => '#'),
+//                        array('label' => 'Level 3 Menu', 'url' => '#', 'items' => array(
+//                            array('label' => 'Sub-Menu 1', 'url' => '#'),
+//                             array('label' => 'Sub-Menu 2', 'url' => '#'),
+//                        )),
+//                    )),
+//                    array('label' => 'Login', 'url' => array('site/login'), 'visible' => Yii::app()->user->isGuest),
+//                    array('label' => 'Logout (' . Yii::app()->user->name . ')', 'url' => array('/site/logout'), 'visible' => !Yii::app()->user->isGuest)
+//                )
+//            ));
+
+            $menuName = ($this->getSide() == 'frontend') ? 'main-menu' : 'admin-menu';
+            
+            $this->widget('application.modules.menu.widgets.MenuWidget', array(
+                'brandLabel'=>Yii::app()->name,
+                'name'=>$menuName,
             ));
             ?>
 	<?php if(isset($this->breadcrumbs)):?>
