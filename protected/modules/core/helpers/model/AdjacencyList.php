@@ -5,52 +5,15 @@ Yii::import('application.modules.core.helpers.request.CoreHttpRequest');
 class AdjacencyList extends ESIterator {
 	
 	/**
-	 * Линия начального (первого) уровня пункта
-	 * @var string $starLine
-	 */
-	public static $startLine = ' | ';
-	
-	/**
-	 * Линия остальных пунктов
-	 * @static string $continousLine
-	 */
-	public static $continousLine = ' -- ';
-	
-	/**
-	 * Выходной массив
-	 * @var array $out
-	 */
-	private static $_out = array();
-	
-	/**
-	 * Входной массив
-	 * @var array $levels
-	 */
-	private static $_levels = array();
-	
-	/**
-	 * Временный массив для пунктов меню
-	 * @var array $menu
-	 */
-	private static $_menu = array();
-	
-	/**
-	 * Берем крайний уровень, от него будет двигаться
-	 * @param string $tableName название таблицы
-	 * @return integer максмимальный существующий уровень пункта
-	 */
-	private static function getMaxLevel($tableName){
-		$sql = "SELECT MAX(level) FROM $tableName";
-		return (int) Yii::app()->db->createCommand($sql)->queryScalar();
-	}	
-	
-	/**
 	 * Готовим наши массивы для заполнения, создаем уровни
 	 * @param string $className
 	 * @param array $params массив параметров.
 	 * @throws ESIteratorException
 	 */
-	private static function prepareData($className,$params = array()){
+	protected static function prepareData($className,$params = array()){
+		//clear static variable whicр contain old data
+                self::clear();
+            
 		$criteria = new CDbCriteria();
 		
 		if(isset($params['menuName']))
@@ -62,11 +25,20 @@ class AdjacencyList extends ESIterator {
                 }
                 
                 if(isset($params['order']))		
-			$criteria->order = 't.' . $params['order'].' ASC';
+			$criteria->order = $params['order'].' ASC';
 		else
 			$criteria->order = 't.id ASC';
 		
-		
+                if(isset($params['condition']))
+                {
+                    $criteria->condition = $params['condition'];
+                    if(isset($params['params']))
+                    {
+                        $criteria->params=$params['params'];
+                    }
+                }
+
+                
 		if(isset($params['sql']))
 			$data = $className::model()->findBySql($params['sql']);
 		else
@@ -87,9 +59,9 @@ class AdjacencyList extends ESIterator {
 	}
 		
 	
-	public static function getForMenu($className, $menuName='main-menu', $sort='title'){
+	public static function getForMenu($className, $menuName='main-menu', $order='title'){
 		//готовим массивы для обработки
-		self::prepareData($className,array('menuName'=>$menuName, 'order'=>$sort));
+		self::prepareData($className,array('menuName'=>$menuName, 'order'=>$order));
 		//обрабатываем данные	
 		self::iterateForMenu(1, null);
 		/*
@@ -115,7 +87,7 @@ class AdjacencyList extends ESIterator {
 	 * @param type $index parent_id
 	 * @return array
 	 */
-	private static function iterateForMenu($i,$index){
+	protected static function iterateForMenu($i,$index){
 		if(!isset(self::$_levels[$i])) return array();
 		
 		//вешаем счетчик
@@ -185,4 +157,38 @@ class AdjacencyList extends ESIterator {
 			}
 		}
 	}
+
+	/**
+	 * Генерируем многоуровнеый отсортированный массив.
+	 * Применимо как для всяких категорий так и для пунктов меню.
+	 * Главное требование - таблица должна иметь 3 обязательных поля:
+	 * <code>int parent_id, int level, string title</code>
+	 * 
+	 * Можно смело использовать вместо <code>CHtml::listData(Class::model()->findAll(),'id','title')</code>
+	 * @param string $className Имя класса AR.
+	 * @return array <code>id=>title</code>
+	 * @throws ESIteratorException если поле 'level' отсутствует в таблице, то метод выбросит 
+	 * исключение
+	 */
+	public static function getLevels($className, $params=array()){
+		self::prepareData($className, $params);	
+
+		$i = 1;
+		foreach(self::$_levels[$i] AS $item){			
+			self::$_out[$item->id] = self::drawLines($i).$item->title;
+			self::recursiveIterateLevels(self::$_levels, $i+1, $item->id);
+		}
+		
+                return self::$_out;
+	}
+        
+        private function clear()
+        {
+            self::$_levels='';
+            self::$_menu='';
+            self::$_out='';
+        }
+        
+       
+
 }

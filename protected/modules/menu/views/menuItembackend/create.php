@@ -4,12 +4,12 @@
 
 $this->breadcrumbs=array(
 	'Menus'=>array('menubackend/index'),
-        'Menu Items'=>array('index'),
+        'Items'=>array('index'),
 	'Create',
 );
 
 $this->menu=array(
-	array('label'=>'List MenuItem', 'url'=>array('index')),
+	array('label'=>'List Items', 'url'=>array('index')),
 	array('label'=>'List Menu', 'url'=>array('/menu/menubackend/index')),
 );
 ?>

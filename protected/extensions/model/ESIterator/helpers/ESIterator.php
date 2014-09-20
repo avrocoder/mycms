@@ -27,26 +27,26 @@ class ESIterator {
 	 * Выходной массив
 	 * @var array $out
 	 */
-	private static $_out = array();
+	protected static $_out = array();
 	
 	/**
 	 * Входной массив
 	 * @var array $levels
 	 */
-	private static $_levels = array();
+	protected static $_levels = array();
 	
 	/**
 	 * Временный массив для пунктов меню
 	 * @var array $menu
 	 */
-	private static $_menu = array();
+	protected static $_menu = array();
 	
 	/**
 	 * Берем крайний уровень, от него будет двигаться
 	 * @param string $tableName название таблицы
 	 * @return integer максмимальный существующий уровень пункта
 	 */
-	private static function getMaxLevel($tableName){
+	protected static function getMaxLevel($tableName){
 		$sql = "SELECT MAX(level) FROM $tableName";
 		return (int) Yii::app()->db->createCommand($sql)->queryScalar();
 	}	
@@ -57,7 +57,7 @@ class ESIterator {
 	 * @param array $params массив параметров.
 	 * @throws ESIteratorException
 	 */
-	private static function prepareData($className,$params = array()){
+	protected static function prepareData($className,$params = array()){
 		$criteria = new CDbCriteria();
 		
 		if(isset($params['order']))		
@@ -92,7 +92,7 @@ class ESIterator {
 	 * @param integer $index идентификатор пердыдущего пункта меню
 	 * @return void
 	 */
-	private static function recursiveIterateLevels($levels,$i,$index){
+	protected static function recursiveIterateLevels($levels,$i,$index){
 		if(!isset($levels[$i])) return;
 		foreach($levels[$i] AS $item){
 			if($item->parent_id == $index){
@@ -115,11 +115,12 @@ class ESIterator {
 	 * <code>ESIterator::$startLine = 'корневой пункт'</code> и
 	 * <code>ESIterator::$continousLine = 'все остальные пункты'</code> соответственно
 	 */
-	private static function drawLines($i)
+	protected static function drawLines($i)
 	{
-		if($i == 1)
+                if($i == 1)
 			return self::$startLine;
 		
+                $outString='';
 		$outString .= self::$startLine;
 		for($q = 1;$q < $i; $q++){
 			$outString .= self::$continousLine;
@@ -174,7 +175,7 @@ class ESIterator {
 		return self::$_out;
 	}
 	
-	private static function recursiveDataIterator($levels,$i,$index){
+	protected static function recursiveDataIterator($levels,$i,$index){
 		if(!isset($levels[$i])) return;
 		
 		foreach($levels[$i] AS $item){
@@ -239,7 +240,7 @@ class ESIterator {
 	 * @param type $index parent_id
 	 * @return array
 	 */
-	private static function iterateForMenu($i,$index){
+	protected static function iterateForMenu($i,$index){
 		if(!isset(self::$_levels[$i])) return array();
 		
 		//вешаем счетчик

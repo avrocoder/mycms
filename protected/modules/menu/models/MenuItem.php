@@ -11,7 +11,7 @@
  * @property string $link
  * @property integer $isInternalRoute
  * @property integer $level
- * @property integer $weight
+ * @property integer $order
  * @property string $description
  * @property integer $status
  *
@@ -22,6 +22,8 @@
  */
 class MenuItem extends BaseBackendModel
 {
+        public $order=100;
+        public $isInternalRoute=1;
 	/**
 	 * @return string the associated database table name
 	 */
@@ -38,12 +40,12 @@ class MenuItem extends BaseBackendModel
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('menu_id, title, link, weight, status', 'required'),
-			array('menu_id, parent_id, isInternalRoute, weight, status', 'numerical', 'integerOnly'=>true),
+			array('menu_id, title, link, order, status', 'required'),
+			array('menu_id, parent_id, isInternalRoute, level, order, status', 'numerical', 'integerOnly'=>true),
 			array('title, link, description', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, menu_id, parent_id, title, link, weight, description, status', 'safe', 'on'=>'search'),
+			array('id, menu_id, parent_id, title, link, order, description, status', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -72,7 +74,7 @@ class MenuItem extends BaseBackendModel
 			'parent_id' => 'Parent',
 			'title' => 'Title',
 			'link' => 'Link',
-			'weight' => 'Weight',
+			'order' => 'Order',
 			'description' => 'Description',
 			'status' => 'Status',
 		);
@@ -101,7 +103,7 @@ class MenuItem extends BaseBackendModel
 		$criteria->compare('parent_id',$this->parent_id);
 		$criteria->compare('title',$this->title,true);
 		$criteria->compare('link',$this->link,true);
-		$criteria->compare('weight',$this->weight);
+		$criteria->compare('order',$this->order);
 		$criteria->compare('description',$this->description,true);
 		$criteria->compare('status',$this->status);
 
@@ -129,5 +131,25 @@ class MenuItem extends BaseBackendModel
         public function beforeValidate() {
             ($this->parent_id == null) ? $this->level=0 : $this->level=$this->parent->level+1;
             return parent::beforeValidate();
+        }
+        
+        
+        /*Rerurns array in the format of the listData for CHtml::dropDown()
+         * @param integer menu_id the id menu
+         * @return listData for CHtml::dropDown()
+         */
+        public function getListData($menu_id=0)
+        {
+            Yii::import('application.modules.core.helpers.model.AdjacencyList');
+            $params=array();
+            if ($menu_id!=0)
+            {
+                $params=array(
+                    'condition'=>'menu_id=:menu_id',
+                    'params'=>array(':menu_id'=>$menu_id),
+                );
+            }
+            $listData=AdjacencyList::getLevels('MenuItem', $params);
+            return $listData;
         }
 }

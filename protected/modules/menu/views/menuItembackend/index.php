@@ -4,13 +4,13 @@
 
 $this->breadcrumbs=array(
 	'Menus'=>array('menubackend/index'),
-        'Menu Items'=>array('index'),
+        'Items'=>array('index'),
 	'Manage',
 );
 
 $this->menu=array(
 	array('label'=>'List Menu', 'url'=>array('/menu/menubackend/index')),
-	array('label'=>'Create MenuItem', 'url'=>array('create')),
+	array('label'=>'Create Item', 'url'=>array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -59,7 +59,7 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
                 ),
 		'title',
 		'link',
-		'weight',
+		'order',
 		array(
                     'name' => 'status',
                     'value' => '$data->getStatusName($data->status)',

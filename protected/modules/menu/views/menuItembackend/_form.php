@@ -27,7 +27,7 @@
 	</div>
        <div class="row">
                 <?php echo $form->labelEx($model,'parent_id'); ?>
-                <?php echo $form->dropDownList($model,'parent_id',CHtml::listData(MenuItem::model()->findAll(), 'id', 'title'),array('empty'=>'Корень')); ?>
+                <?php echo $form->dropDownList($model,'parent_id',$model->getListData(),array('empty'=>'Корень')); ?>
 		<?php echo $form->error($model,'parent_id'); ?>
 
 	</div>
@@ -51,9 +51,9 @@
 	</div>
 
         <div class="row">
-		<?php echo $form->labelEx($model,'weight'); ?>
-		<?php echo $form->textField($model,'weight'); ?>
-		<?php echo $form->error($model,'weight'); ?>
+		<?php echo $form->labelEx($model,'order'); ?>
+		<?php echo $form->textField($model,'order'); ?>
+		<?php echo $form->error($model,'order'); ?>
 	</div>
 
 	<div class="row">
@@ -76,3 +76,17 @@
 <?php $this->endWidget(); ?>
 
 </div><!-- form -->
+
+<script type="text/javascript">
+     $('#MenuItem_menu_id').change(function(){
+        $.ajax({
+            type: 'post',
+            url: '<?php echo Yii::app()->urlManager->createUrl('menu/MenuItembackend/ajaxGetChildItems');?>',
+            data: ({menu_id: $('#MenuItem_menu_id').val()}),
+            success: function(data){
+                var $eParent = $('#MenuItem_parent_id');
+                $eParent.html(data);
+            }
+        });
+     })
+</script>

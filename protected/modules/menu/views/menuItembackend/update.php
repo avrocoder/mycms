@@ -4,15 +4,15 @@
 
 $this->breadcrumbs=array(
 	'Menus'=>array('menubackend/index'),
-        'Menu Items'=>array('index'),
+        'Items'=>array('index'),
 	$model->title=>array('view','id'=>$model->id),
 	'Update',
 );
 
 $this->menu=array(
-	array('label'=>'List MenuItem', 'url'=>array('index')),
-	array('label'=>'Create MenuItem', 'url'=>array('create')),
-	array('label'=>'View MenuItem', 'url'=>array('view', 'id'=>$model->id)),
+	array('label'=>'List Items', 'url'=>array('index')),
+	array('label'=>'Create Item', 'url'=>array('create')),
+	array('label'=>'View Item', 'url'=>array('view', 'id'=>$model->id)),
 	array('label'=>'List Menu', 'url'=>array('/menu/menubackend/index')),
 );
 ?>

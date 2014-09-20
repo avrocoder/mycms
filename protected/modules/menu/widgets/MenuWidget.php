@@ -7,12 +7,12 @@ class MenuWidget extends CWidget
     
     public $name = 'main-menu';
     public $brandLabel;
-    public $sort = 'title';
+    public $order = 't.order, t.title';
     
     public function run() {
 
         $model=new AdjacencyList;
-        $items = $model->getForMenu('MenuItem', $this->name,$this->sort);
+        $items = $model->getForMenu('MenuItem', $this->name, $this->order);
 //        echo "<pre>";
 //        print_r($items);
 //        echo "</pre>";     

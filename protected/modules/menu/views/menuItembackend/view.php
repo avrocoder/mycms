@@ -4,15 +4,15 @@
 
 $this->breadcrumbs=array(
 	'Menus'=>array('menubackend/index'),
-        'Menu Items'=>array('index'),
+        'Items'=>array('index'),
 	$model->title,
 );
 
 $this->menu=array(
-	array('label'=>'List MenuItem', 'url'=>array('index')),
-	array('label'=>'Create MenuItem', 'url'=>array('create')),
-	array('label'=>'Update MenuItem', 'url'=>array('update', 'id'=>$model->id)),
-	array('label'=>'Delete MenuItem', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
+	array('label'=>'List Items', 'url'=>array('index')),
+	array('label'=>'Create Item', 'url'=>array('create')),
+	array('label'=>'Update Item', 'url'=>array('update', 'id'=>$model->id)),
+	array('label'=>'Delete Item', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
 	array('label'=>'List Menu', 'url'=>array('/menu/menubackend/index')),
 );
 ?>

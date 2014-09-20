@@ -37,8 +37,8 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model,'weight'); ?>
-		<?php echo $form->textField($model,'weight'); ?>
+		<?php echo $form->label($model,'order'); ?>
+		<?php echo $form->textField($model,'order'); ?>
 	</div>
 
 	<div class="row">

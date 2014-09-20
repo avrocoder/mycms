@@ -160,4 +160,22 @@ class MenuItembackendController extends BaseBackendController
 			Yii::app()->end();
 		}
 	}
+        
+        /**
+         * Returns string like <select> <option value="10">Item1</option> </select>
+         * This method takes 1 param menu_id via AJAX. If menu_id is empty then gets all items.
+         * @param integer menu_id the id menu
+         * @return Returns string like <select> <option value="10">Item1</option> </select>
+         */
+        public function actionAjaxGetChildItems()
+        {
+            if (!Yii::app()->request->isAjaxRequest) throw new CHttpException(404);
+            
+            $menu_id=Yii::app()->request->getPost('menu_id', 0);
+            $model = new MenuItem;
+            $listData=$model->getListData($menu_id);
+            $htmlOptions=array('empty'=>'Корень');
+            $listOptions=CHtml::listOptions('0', $listData, $htmlOptions);
+            echo $listOptions;
+        }
 }
