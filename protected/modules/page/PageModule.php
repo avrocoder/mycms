@@ -1,6 +1,6 @@
 <?php
 
-class PageModule extends CWebModule
+class PageModule extends CoreModule
 {
 	public function init()
 	{

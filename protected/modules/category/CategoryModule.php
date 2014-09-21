@@ -1,6 +1,6 @@
 <?php
 
-class CategoryModule extends CWebModule
+class CategoryModule extends CoreModule
 {
 	public function init()
 	{

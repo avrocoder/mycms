@@ -1,6 +1,6 @@
 <?php
 
-class MenuModule extends CWebModule
+class MenuModule extends CoreModule
 {
 	public function init()
 	{

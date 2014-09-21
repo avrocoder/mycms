@@ -106,4 +106,9 @@ class Menu extends BaseBackendModel
 		return parent::model($className);
 	}
         
+        public function getIdByName($name)
+        {
+            return (int) $this->model()->find('name=:name', array(':name'=>$name))->id;
+        }
+        
 }

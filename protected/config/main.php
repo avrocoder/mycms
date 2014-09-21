@@ -33,6 +33,7 @@ return array(
 		'application.components.*',
                 'core.components.controllers.*',
                 'core.models.*',
+                'core.*',
                 'bootstrap.helpers.*',
                 'bootstrap.behaviors.TbWidget',
                 'bootstrap.widgets.*',
@@ -53,6 +54,7 @@ return array(
 		),
                 'page',
                 'core'=>array(
+                    //default value for cache duration 
                     'cache_duration' => 20,
                 ),
                 'category',
