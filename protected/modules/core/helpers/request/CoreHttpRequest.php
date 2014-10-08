@@ -1,6 +1,6 @@
 <?php
 
-/*
+/**
  * Helper for work with urls
  */
 
@@ -17,7 +17,7 @@ class CoreHttpRequest extends CComponent {
         return $this->url;
     }
 
-    /* Method gets url like http://www.site.com/page?param1=value1&param2=value2
+    /** Method gets url like http://www.site.com/page?param1=value1&param2=value2
      * and rerurns url according to urlManager routers 
      * for our url method rerurns createAbsoluteUrl(array('page',array('param1'=>value1,'param2'=>value2)))
      * @param string $url url like http://www.site.com/page?param1=value1&param2=value2
