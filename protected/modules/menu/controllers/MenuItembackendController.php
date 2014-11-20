@@ -13,10 +13,10 @@ class MenuItembackendController extends BaseBackendController
 	 */
 	public function filters()
 	{
-//		return array(
-//			'accessControl', // perform access control for CRUD operations
-//			'postOnly + delete', // we only allow deletion via POST request
-//		);
+		return array(
+			'accessControl', // perform access control for CRUD operations
+			'postOnly + delete', // we only allow deletion via POST request
+		);
 	}
 
 	/**
@@ -27,17 +27,25 @@ class MenuItembackendController extends BaseBackendController
 	public function accessRules()
 	{
 		return array(
-			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
-				'users'=>array('*'),
+			array('allow', // allow admin user to perform 'admin' and 'delete' actions
+				'actions'=>array('index'),
+				'roles'=>array('menu_item_index'),
 			),
-			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
-				'users'=>array('@'),
+			array('allow',  // allow all users to perform 'index' and 'view' actions
+				'actions'=>array('create'),
+				'roles'=>array('menu_item_add'),
+			),
+			array('allow',  // allow all users to perform 'index' and 'view' actions
+				'actions'=>array('update'),
+				'roles'=>array('menu_item_update'),
+			),
+			array('allow',  // allow all users to perform 'index' and 'view' actions
+				'actions'=>array('view'),
+				'roles'=>array('menu_item_view'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete'),
-				'users'=>array('admin'),
+				'actions'=>array('delete'),
+				'roles'=>array('menu_item_delete'),
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
