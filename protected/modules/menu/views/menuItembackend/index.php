@@ -9,8 +9,8 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'List Menu', 'url'=>array('/menu/menubackend/index')),
 	array('label'=>'Create Item', 'url'=>array('create')),
+	array('label'=>'List Menu', 'url'=>array('/menu/menubackend/index')),
 );
 
 Yii::app()->clientScript->registerScript('search', "

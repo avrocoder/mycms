@@ -37,6 +37,10 @@ return array(
                 'bootstrap.helpers.*',
                 'bootstrap.behaviors.TbWidget',
                 'bootstrap.widgets.*',
+                'application.modules.rights.*',
+                'application.modules.rights.components.*', 
+                'application.modules.user.models.*',
+                'application.modules.user.components.*',
 
 	),
 
@@ -59,6 +63,44 @@ return array(
                 ),
                 'category',
                 'menu',
+                'rights'=>array(
+                    //'install'=>true, // Enables the installer.
+                ),
+                'user'=>array(
+                    'tableUsers' => 'tbl_users',
+                    'tableProfiles' => 'tbl_profiles',
+                    'tableProfileFields' => 'tbl_profiles_fields',                             # encrypting method (php hash function)
+                    
+                    'hash' => 'md5',
+
+                    # send activation email
+                    'sendActivationMail' => true,
+
+                    # allow access for non-activated users
+                    'loginNotActiv' => false,
+
+                    # activate user on registration (only sendActivationMail = false)
+                    'activeAfterRegister' => false,
+
+                    # automatically login from registration
+                    'autoLogin' => true,
+
+                    # registration path
+                    'registrationUrl' => array('/user/registration'),
+
+                    # recovery password path
+                    'recoveryUrl' => array('/user/recovery'),
+
+                    # login form path
+                    'loginUrl' => array('/user/login'),
+
+                    # page after login
+                    'returnUrl' => array('/user/profile'),
+
+                    # page after logout
+                    'returnLogoutUrl' => array('/user/login'),
+                ),
+
 	),
 
 	// application components
@@ -71,11 +113,27 @@ return array(
 		'user'=>array(
 			// enable cookie-based authentication
 			'allowAutoLogin'=>true,
-		),
+//                        'user'=>array(
+//                            'class'=>'RWebUser', // Allows super users access implicitly.
+//                        ),
+                        'class' => 'RWebUser',
+                        'allowAutoLogin'=>true,
+                        'loginUrl' => array('/user/login'),
+                                     
+//                        'authManager'=>array(
+//                            'class'=>'RDbAuthManager', 
+//                        ),
+                ),
+            
+                'authManager'=>array(
+                    'class'=>'RDbAuthManager', 
+                    'defaultRoles' => array('Guest', 'Authenticated') // дефолтная роль
+                ),
 		// uncomment the following to enable URLs in path-format
 
 		'urlManager'=>array(
-			'urlFormat'=>'path',                    
+			'urlFormat'=>'path',  
+                    
                 'showScriptName'=>false,
 			'rules'=>array(
                                 'site/<action>'                                 => 'site/<action>',

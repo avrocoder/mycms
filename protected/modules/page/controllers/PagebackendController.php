@@ -14,8 +14,8 @@ class PagebackendController extends BaseBackendController
 	public function filters()
 	{
 		return array(
-			//'accessControl', // perform access control for CRUD operations
-			//'postOnly + delete', // we only allow deletion via POST request
+			'accessControl', // perform access control for CRUD operations
+			'postOnly + delete', // we only allow deletion via POST request
 		);
 	}
 
@@ -27,17 +27,25 @@ class PagebackendController extends BaseBackendController
 	public function accessRules()
 	{
 		return array(
-			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','upload'),
-				'users'=>array('*'),
+			array('allow', // allow admin user to perform 'admin' and 'delete' actions
+				'actions'=>array('index'),
+				'roles'=>array('page_page_index'),
 			),
-			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
-				'users'=>array('@'),
+			array('allow',  // allow all users to perform 'index' and 'view' actions
+				'actions'=>array('create'),
+				'roles'=>array('page_page_add'),
+			),
+			array('allow',  // allow all users to perform 'index' and 'view' actions
+				'actions'=>array('update'),
+				'roles'=>array('page_page_update'),
+			),
+			array('allow',  // allow all users to perform 'index' and 'view' actions
+				'actions'=>array('view'),
+				'roles'=>array('page_page_view'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('index','delete'),
-				'users'=>array('admin'),
+				'actions'=>array('delete'),
+				'roles'=>array('page_page_delete'),
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
